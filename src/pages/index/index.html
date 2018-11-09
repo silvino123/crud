@@ -1,0 +1,62 @@
+<!--
+  Generated template for the IndexPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title text-center>productos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+
+        <ion-item>
+          <ion-label floating>Nombre</ion-label>
+          <ion-input type="text" name="name" [(ngModel)]="product.name" ></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Descripcion</ion-label>
+          <ion-input type="text" name="description" [(ngModel)]="product.description" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Precio</ion-label>
+            <ion-input type="number" name="price" [(ngModel)]="product.price" step="0.01"></ion-input>
+          </ion-item>
+      
+      </ion-list>
+      <div padding>
+          <button ion-button block (click)="addProduct()" color="secondary">Agregar</button>
+        </div>
+        <ion-list *ngFor="let p of products">
+            <ion-item>
+                {{ p.name }} <br/>
+                {{p.description}} <br/>
+                {{p.price}} <br/>
+                <button ion-button (click)="deleteProduct($event, p)" color="danger"> <ion-icon name="trash"></ion-icon></button>
+                <button ion-button (click)="editProduct($event, p)" color="primary"><ion-icon name="create"></ion-icon></button>
+              </ion-item>
+             
+              <div *ngIf="editing && editingProduct.id == p.id">
+                 <br>
+                <form (ngSubmit)="updateProduct(product)">
+                  <input type="text" name="name" [(ngModel)]="editingProduct.name">
+                  <br>
+                  <input type="text" name="description" [(ngModel)]="editingProduct.description">
+                  <br>
+                  <input type="text" name="price" [(ngModel)]="editingProduct.price">
+                  <br>
+                  <button ion-button type="submit" color="primary">
+                    Editar
+                  </button>
+                </form>
+              </div>
+        </ion-list>
+       
+</ion-content>
